@@ -9,6 +9,7 @@ $ yarn
 
 ## how to run test
 ```
-$ yarn test:e2e
+$ yarn dev // run app on http://localhost:3000
+$ yarn test:e2e // runs nightwatch test
 ```
 check screenshot `$ cd reports`
