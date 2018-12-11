@@ -2,7 +2,6 @@
   "name": "next-nightwatch",
   "version": "1.0.0",
   "description": "Integration testing using nightwatch (Selenium) on next.js (react)",
-  "main": "index.js",
   "repository": "https://github.com/pramendra/next-nightwatch.git",
   "author": "Pramendra Gupta <pramendra@gmail.com>",
   "license": "MIT",
@@ -21,5 +20,11 @@
     "chromedriver": "^2.44.1",
     "nightwatch": "^0.9.21",
     "selenium-server": "^3.141.59"
-  }
+  },
+  "keywords": [
+    "nightwatch",
+		"react",
+		"next",
+		"Selenium"
+	]
 }
