@@ -12,4 +12,5 @@ module.exports = Object.assign(
   },
   // tests
   require('./routes.test')(),
+  require('./links.test')(),
 );
