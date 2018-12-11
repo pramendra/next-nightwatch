@@ -9,11 +9,17 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "test:e2e": "nightwatch ./e2e/index.js -e default,mobile"
   },
   "dependencies": {
     "next": "^7.0.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
+  },
+  "devDependencies": {
+    "chromedriver": "^2.44.1",
+    "nightwatch": "^0.9.21",
+    "selenium-server": "^3.141.59"
   }
 }
