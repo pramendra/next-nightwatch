@@ -16,7 +16,7 @@ jobs:
           keys:
             - app-dependencies-{{ checksum "yarn.lock" }}
             - app-dependencies-
-      - run: sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
+      # - run: sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
       - run:
           name: Install Dependencies
           command: yarn
