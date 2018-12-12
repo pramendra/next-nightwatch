@@ -1,5 +1,7 @@
 # Integration testing using nightwatch (Selenium) on next.js (react)
 
+[![CircleCI](https://circleci.com/gh/pramendra/next-nightwatch.svg?style=svg)](https://circleci.com/gh/pramendra/next-nightwatch)
+
 ## Setup
 
 ```
