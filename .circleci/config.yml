@@ -1,6 +1,6 @@
 version: 2
 defaults: &defaults
-  working_directory: /src
+  working_directory: ~/src
 
 node: &node
   <<: *defaults
