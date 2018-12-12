@@ -80,3 +80,5 @@ typings/
 
 reports/
 tests_output/
+
+!yarn.lock
