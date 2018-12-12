@@ -1,11 +1,11 @@
 version: 2
 defaults: &defaults
-  working_directory: ~/src
+  working_directory: /src
 
 node: &node
   <<: *defaults
   docker:
-    - image: circleci/node:10.13.0
+    - image: node:10.13.0
 
 jobs:
   install:
