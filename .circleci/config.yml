@@ -5,7 +5,7 @@ defaults: &defaults
 node: &node
   <<: *defaults
   docker:
-    - image: node:10.11.0
+    - image: circleci/node:10.13.0
 
 jobs:
   install:
