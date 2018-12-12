@@ -9,8 +9,9 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "test:e2e": "nightwatch ./e2e/index.js -e default,mobile",
     "lint": "eslint '**/*.js' --quiet",
-    "test:e2e": "nightwatch ./e2e/index.js -e default,mobile"
+    "format": "prettier --write 'pages/**/*.js e2e/**/*.js'"
   },
   "dependencies": {
     "next": "^7.0.2",
@@ -22,10 +23,13 @@
     "chromedriver": "^2.44.1",
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
     "nightwatch": "^0.9.21",
+    "prettier": "^1.15.3",
     "selenium-server": "^3.141.59"
   },
   "keywords": [

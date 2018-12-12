@@ -17,7 +17,7 @@ check screenshot `$ cd reports`
 
 ## setup linting
 
-### find dependencies of `eslint-config-airbnb` 
+### find and install dependencies of `eslint-config-airbnb` 
 `npm info "eslint-config-airbnb@latest" peerDependencies --json`
 
 ### output
@@ -82,4 +82,47 @@ yarn add -D eslint eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-rea
     node: true,
   },
 };
+```
+
+
+## setup prettier
+
+### find and install dependencies
+```
+yarn add -D prettier eslint-config-prettier eslint-plugin-prettier
+```
+
+### integrate prettier within eslint
+
+```
+   extends: [
+-    'airbnb',
++    'airbnb',
++    'prettier',
++    "prettier/react"
+   ],
++  plugins: ['prettier'],
+   parser: 'babel-eslint',
+   rules: {
+     'class-methods-use-this': 'off',
+@@ -17,6 +20,7 @@ module.exports = {
+     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+     'react/react-in-jsx-scope': 0,
+     'react/require-default-props': 0,
++    'prettier/prettier': ['error'],
+   },
+  ```
+
+### create `.prettierrc` on route with following config
+```
+{
+  "printWidth": 80,
+  "singleQuote": true,
+  "trailingComma": "all"
+}
+```
+
+### update `package.json` to format code via cli
+```
+"format": "prettier --write '**/*.{js,jsx}'"
 ```

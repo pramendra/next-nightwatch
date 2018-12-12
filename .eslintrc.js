@@ -1,7 +1,6 @@
 module.exports = {
-  extends: [
-    'airbnb', 
-  ],
+  extends: ['airbnb', 'prettier', 'prettier/react'],
+  plugins: ['prettier'],
   parser: 'babel-eslint',
   rules: {
     'class-methods-use-this': 'off',
@@ -17,6 +16,7 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/react-in-jsx-scope': 0,
     'react/require-default-props': 0,
+    'prettier/prettier': ['error'],
   },
   globals: {
     document: true,
