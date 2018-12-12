@@ -5,7 +5,7 @@ defaults: &defaults
 node: &node
   <<: *defaults
   docker:
-    - image: node:10.11.0
+    - image: node:10.13.0
 
 jobs:
   install:
@@ -16,6 +16,7 @@ jobs:
           keys:
             - app-dependencies-{{ checksum "yarn.lock" }}
             - app-dependencies-
+      # - run: sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
       - run:
           name: Install Dependencies
           command: yarn
@@ -34,9 +35,6 @@ jobs:
       - run:
           name: Linter
           command: yarn lint
-      - run:
-          name: Flow
-          command: yarn run typecheck
   test:
     <<: *node
     steps:

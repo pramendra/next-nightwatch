@@ -3,11 +3,11 @@ const routes = [
   { name: 'home', path: '/' },
   { name: 'category', path: 'category' },
 ];
- function getEnvName() {
+function getEnvName() {
   const idx = process.argv.findIndex(arg => arg === '-e' || arg === '--env');
   return idx > -1 ? process.argv[idx + 1] : undefined;
 }
- module.exports = () => ({
+module.exports = () => ({
   'Routes - test mobile and desktop page loads properly': browser => {
     const env = getEnvName();
     routes.map(({ name, path }) => {
@@ -16,6 +16,6 @@ const routes = [
         .waitForElementVisible('body')
         .saveScreenshot(`./reports/${env}-${name}-page.png`);
     });
-     browser.end();
+    browser.end();
   },
 });
