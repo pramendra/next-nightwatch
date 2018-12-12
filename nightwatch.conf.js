@@ -22,7 +22,10 @@ module.exports = {
         acceptSslCerts: true,
 
         chromeOptions: {
-          args: os.platform() === 'linux' ? ['headless', 'no-sandbox', browserSize] : [browserSize],
+          args:
+            os.platform() === 'linux'
+              ? ['headless', 'no-sandbox', browserSize]
+              : [browserSize],
         },
       },
       globals: {
