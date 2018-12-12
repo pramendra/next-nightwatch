@@ -1,0 +1,66 @@
+version: 2
+defaults: &defaults
+  working_directory: /src
+
+node: &node
+  <<: *defaults
+  docker:
+    - image: node:10.11.0
+
+jobs:
+  install:
+    <<: *node
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - app-dependencies-{{ checksum "yarn.lock" }}
+            - app-dependencies-
+      - run:
+          name: Install Dependencies
+          command: yarn
+      - save_cache:
+          key: app-dependencies-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+  check:
+    <<: *node
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - app-dependencies-{{ checksum "yarn.lock" }}
+            - app-dependencies-
+      - run:
+          name: Linter
+          command: yarn lint
+      - run:
+          name: Flow
+          command: yarn run typecheck
+  test:
+    <<: *node
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - app-dependencies-{{ checksum "yarn.lock" }}
+            - app-dependencies-
+      - run:
+          name: Tests
+          command: yarn test:e2e
+
+workflows:
+  version: 2
+  install-check-test:
+    jobs:
+      - install
+      - check:
+          requires:
+            - install
+          filters:
+            branches:
+              ignore: master
+      - test:
+          requires:
+            - install
+            - check
