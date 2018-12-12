@@ -1,43 +1,4 @@
-# Integration testing using nightwatch (Selenium) on next.js (react)
-
-## Setup
-```
-$ git clone https://github.com/pramendra/next-nightwatch
-$ cd next-nightwatch
-$ yarn
-```
-
-## how to run test
-```
-$ yarn dev // run app on http://localhost:3000
-$ yarn test:e2e // runs nightwatch test
-```
-check screenshot `$ cd reports`
-
-
-## setup linting
-
-### find dependencies of `eslint-config-airbnb` 
-`npm info "eslint-config-airbnb@latest" peerDependencies --json`
-
-### output
-```
-{
-  "eslint": "^4.19.1 || ^5.3.0",
-  "eslint-plugin-import": "^2.14.0",
-  "eslint-plugin-jsx-a11y": "^6.1.1",
-  "eslint-plugin-react": "^7.11.0"
-}
-```
-
-### install
-```
-yarn add -D eslint eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-config-airbnb
-```
-
-### add add eslint configuration in `.eslintrc.js`
- ```
- module.exports = {
+module.exports = {
   extends: [
     'airbnb', 
   ],
@@ -82,4 +43,3 @@ yarn add -D eslint eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-rea
     node: true,
   },
 };
-```
