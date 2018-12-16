@@ -1,0 +1,91 @@
+:root {
+  /* colors */
+  --color-transparent: 'transparent';
+  --color-black: #000000;
+  --color-dark-blue: #0d2233;
+  --color-gray: #9b9b9b;
+  --color-down-blue: #007ace;
+  --color-blue-gray: #637381;
+  --color-up-red: #de3618;
+  --color-white: #ffffff;
+  --color-iris-two: #5c6ac4;
+  --color-pale-blue: #dfe3e8;
+  --color-blue-grey: #c4cdd5;
+  --color-pale-grey: #f3f4fa;
+  --color-bluey-grey: #919eab;
+
+  /* font-size */
+  /* 10px */
+  /* Text0 */
+  --text-xxs: 0.625rem;
+
+  /* 12px */
+  /* Text1 */
+  --text-xs: 0.75rem;
+
+  /* 14px */
+  /* Text2 */
+  --text-sm: 0.875rem;
+
+  /* 16px */
+  /* Text3 */
+  --text-base: 1rem;
+
+  /* 18px */
+  /* Text4 */
+  --text-lg: 1.125rem;
+
+  /* 20px */
+  /* Text5 */
+  --text-xl: 1.25rem;
+
+  /* 24px */
+  /* Text6 */
+  --text-2xl: 1.5rem;
+
+  /* 30px */
+  /* Text7 */
+  --text-3xl: 1.875rem;
+
+  /* 36px */
+  /* Text8 */
+  --text-4xl: 2.25rem;
+
+  /* 48px */
+  /* Text9 */
+  --text-5xl: 3rem;
+
+  /* font weight */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-bold: 700;
+
+  /* line height */
+  --leading-none: 1;
+  /* --leading-tight: 1.25; */
+  --leading-normal: 1.5;
+  --leading-loose: 2;
+
+  /* Letter Spacing */
+  /* --tracking-tight: -0.05em; */
+  --tracking-normal: 0;
+  /* --tracking-wide: 0.05em; */
+
+  /* Spacing */
+  --space-px: 1px;
+  --space-0: 0;
+  /* 4px */
+  --space-1: 0.25rem;
+  /* 8px */
+  --space-2: 0.5rem;
+  /* 12px */
+  --space-3: 0.75rem;
+  /* 16px */
+  --space-4: 1rem;
+  /* 20px */
+  --space-5: 1.25rem;
+  /* 24px */
+  --space-6: 1.5rem;
+  /* 32px */
+  --space-8: 2rem;
+}

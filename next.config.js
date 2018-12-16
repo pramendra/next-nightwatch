@@ -26,4 +26,16 @@ module.exports = withOffline({
       },
     ],
   },
+  webpack(config, { dev, buildId, isServer }) {
+    // css loader
+    config.module.rules.push({
+      test: /\.css$/,
+      use: [
+        'babel-loader',
+        'raw-loader',
+        { loader: 'postcss-loader', options: { path: './postcss.config.js' } },
+      ],
+    });
+    return config;
+  },
 });

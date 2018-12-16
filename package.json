@@ -45,7 +45,9 @@
     "eslint-plugin-react": "^7.11.1",
     "flow-bin": "^0.89.0",
     "nightwatch": "^1.0.15",
+    "postcss-loader": "^3.0.0",
     "prettier": "^1.15.3",
+    "raw-loader": "^1.0.0",
     "selenium-server": "^3.141.59"
   },
   "keywords": [
