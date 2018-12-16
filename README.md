@@ -526,3 +526,41 @@ const clientSideJS = `
 ```
 GOOGLE_ANALYTICS=
 ```
+
+### setup styled-component
+
+```
+yarn add styled-components
+yarn add -D babel-plugin-styled-components
+
+```
+
+#### append .babelrc
+
+```
+-  "plugins": ["transform-flow-strip-types"]
++  "plugins": ["transform-flow-strip-types", "styled-components"]
+```
+
+#### append pages/\_document.js
+
+```
+-  static async getInitialProps(ctx: any) {
+-    const initialProps = await Document.getInitialProps(ctx);
+-    return { ...initialProps };
++  static getInitialProps({ renderPage }: any) {
++    const sheet = new ServerStyleSheet();
++    const page = renderPage(App => props =>
++      sheet.collectStyles(<App {...props} />),
++    );
++    const styleTags = sheet.getStyleElement();
++    return { ...page, styleTags };
+   }
+
+   render() {
+@@ -53,6 +58,7 @@ export default class MyDocument extends Document {
+               __html: `* { box-sizing: border-box !important; } html { font-size: 10px } b
+             }}
+           />
++          {this.props.styleTags}
+```

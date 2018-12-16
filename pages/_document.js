@@ -2,6 +2,7 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 import getConfig from 'next/config';
+import { ServerStyleSheet } from 'styled-components';
 
 // $FlowFixMe
 const { publicRuntimeConfig } = getConfig();
@@ -29,9 +30,13 @@ const GA = `
 `;
 
 export default class MyDocument extends Document {
-  static async getInitialProps(ctx: any) {
-    const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+  static getInitialProps({ renderPage }: any) {
+    const sheet = new ServerStyleSheet();
+    const page = renderPage(App => props =>
+      sheet.collectStyles(<App {...props} />),
+    );
+    const styleTags = sheet.getStyleElement();
+    return { ...page, styleTags };
   }
 
   render() {
@@ -53,6 +58,7 @@ export default class MyDocument extends Document {
               __html: `* { box-sizing: border-box !important; } html { font-size: 10px } body { font-size: 1.6rem; margin: 0; }`,
             }}
           />
+          {this.props.styleTags}
         </Head>
         <body>
           <noscript>
