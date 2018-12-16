@@ -307,7 +307,7 @@ app.prepare().then(() => {
 
 #### update package.json
 
-````
+```
 +  "main": "server/main.js",
    "scripts": {
 -    "dev": "next",
@@ -316,4 +316,131 @@ app.prepare().then(() => {
 -    "start": "next start",
 +    "start": "NODE_ENV=production node server/main.js",
 ```
-````
+
+### add server-worker
+
+```
+yarn add next-offline
+```
+
+#### updated next.config.js
+
+```
+const withOffline = require('next-offline');
+
+module.exports = withOffline({
+  workboxOpts: {
+    runtimeCaching: [
+      {
+        urlPattern: /^https?.*/,
+        handler: 'networkFirst',
+        options: {
+          cacheName: 'https-calls',
+          networkTimeoutSeconds: 15,
+          expiration: {
+            maxEntries: 150,
+            maxAgeSeconds: 30 * 24 * 60 * 60,
+          },
+          cacheableResponse: {
+            statuses: [0, 200],
+          },
+        },
+      },
+    ],
+  },
+});
+
+```
+
+#### upddate server/main.js
+
+```
+const express = require('express');
+const bodyParser = require('body-parser');
+const next = require('next');
+require('dotenv').config();
+const { join } = require('path');
+
+const port = parseInt(process.env.PORT, 10) || 3000;
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
+
+const ServiceWorker = _app => (req, res) => {
+  const filePath = join(__dirname, '../', '.next', 'service-worker.js');
+  _app.serveStatic(req, res, filePath);
+};
+
+app.prepare().then(() => {
+  const server = express();
+  server.use(bodyParser.json());
+
+  server.get('/service-worker.js', ServiceWorker(app));
+  server.get('*', (req, res) => handle(req, res));
+  server.listen(port, err => {
+    if (err) throw err;
+    console.log(`> Ready on http://localhost:${port}`);
+  });
+});
+
+```
+
+#### update \_document.js
+
+```
+// @flow
+import React from 'react';
+import Document, { Head, Main, NextScript } from 'next/document';
+
+export default class MyDocument extends Document {
+  static async getInitialProps(ctx: any) {
+    const initialProps = await Document.getInitialProps(ctx);
+    return { ...initialProps };
+  }
+
+  render() {
+    return (
+      <html lang="en-US">
+        <Head>
+          <meta charSet="utf-8" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          />
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `* { box-sizing: border-box !important; } html { font-size: 10px } body { font-size: 1.6rem; margin: 0; }`,
+            }}
+          />
+        </Head>
+        <body>
+          <noscript>
+            Please enable Javascript to continue using this application.
+          </noscript>
+          <Main />
+          <NextScript />
+          <script
+            type="text/javascript"
+            dangerouslySetInnerHTML={{ __html: clientSideJS }}
+          />
+        </body>
+      </html>
+    );
+  }
+}
+
+const clientSideJS = `
+  document.addEventListener('DOMContentLoaded', event => {
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').then(registration => {
+          console.log('SW registered: ', registration)
+        }).catch(registrationError => {
+          console.log('SW registration failed: ', registrationError)
+        })
+      })
+    }
+  })
+`;
+```
