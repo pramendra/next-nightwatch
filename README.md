@@ -161,7 +161,7 @@ add following config in `.vscode/settings.json`
 ### setup flow type
 
 ```
-  yarn add -D eslint-plugin-flowtype flow-bin
+  yarn add -D eslint-plugin-flowtype flow-bin babel-preset-flow babel-plugin-transform-flow-strip-types
 ```
 
 #### append followng scripts
@@ -178,7 +178,8 @@ add following config in `.vscode/settings.json`
 
 ```
 {
-  "presets": ["next/babel", "flow"]
+  "presets": ["next/babel"],
+  "plugins": ["transform-flow-strip-types"]
 }
 ```
 
@@ -274,3 +275,45 @@ declare module "next/document" {
   };
 }
 ```
+
+### setup next/express server
+
+```
+yarn add body-parser dotenv express
+```
+
+#### create server/main.js
+
+```
+const express = require('express');
+const bodyParser = require('body-parser');
+const next = require('next');
+
+const port = parseInt(process.env.PORT, 10) || 3000;
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
+
+app.prepare().then(() => {
+  const server = express();
+  server.use(bodyParser.json());
+  server.get('*', (req, res) => handle(req, res));
+  server.listen(port, err => {
+    if (err) throw err;
+    console.log(`> Ready on http://localhost:${port}`);
+  });
+});
+```
+
+#### update package.json
+
+````
++  "main": "server/main.js",
+   "scripts": {
+-    "dev": "next",
++    "dev": "node server/main.js",
+     "build": "next build",
+-    "start": "next start",
++    "start": "NODE_ENV=production node server/main.js",
+```
+````
