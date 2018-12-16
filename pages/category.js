@@ -2,11 +2,13 @@
 import React from 'react';
 import Link from 'next/link';
 
-type props = { test: boolean };
-export default ({ test = true }: props) => (
+type props = {
+  category: 'category',
+};
+export default ({ category = 'category' }: props) => (
   <h1>
     <Link href="/">
-      <a id="home-link">Link to Home Page {test}</a>
+      <a id="home-link">Link to Home Page{category}</a>
     </Link>
   </h1>
 );
