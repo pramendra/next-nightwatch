@@ -1,6 +1,11 @@
 module.exports = {
-  extends: ['airbnb', 'prettier', 'prettier/react'],
-  plugins: ['prettier'],
+  extends: [
+    'airbnb',
+    'prettier',
+    'prettier/react',
+    'plugin:flowtype/recommended',
+  ],
+  plugins: ['flowtype', 'prettier'],
   parser: 'babel-eslint',
   rules: {
     'class-methods-use-this': 'off',
@@ -17,6 +22,8 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     'react/require-default-props': 0,
     'prettier/prettier': ['error'],
+    'flowtype/boolean-style': [2, 'boolean'],
+    'flowtype/space-after-type-colon': 0,
   },
   globals: {
     document: true,
