@@ -1,0 +1,13 @@
+/* @flow */
+
+declare module "ramda/src/forEachObjIndexed" {
+  declare module.exports: any;
+}
+
+declare module "ramda/src/pick" {
+  declare module.exports: any;
+}
+
+declare module "ramda/src/keys" {
+  declare module.exports: any;
+}
