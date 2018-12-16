@@ -11,12 +11,22 @@
     "start": "next start",
     "test:e2e": "nightwatch ./e2e/index.js -e default,mobile",
     "lint": "eslint '**/*.js' --quiet",
-    "format": "prettier --write '**/*.js'"
+    "format": "prettier --write '**/*.js'",
+    "flow start": "flow start",
+    "flow stop": "flow stop",
+    "flow status": "flow status",
+    "flow coverage": "flow coverage"
   },
   "dependencies": {
+    "ava": "^1.0.1",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
     "next": "^7.0.2",
+    "next-offline": "^3.3.1",
     "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react-dom": "^16.6.3",
+    "redux": "^4.0.1",
+    "redux-saga": "^0.16.2"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
@@ -24,10 +34,12 @@
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-flowtype": "^3.2.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
+    "flow-bin": "^0.89.0",
     "nightwatch": "^1.0.15",
     "prettier": "^1.15.3",
     "selenium-server": "^3.141.59"
