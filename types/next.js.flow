@@ -24,6 +24,10 @@ declare module "next/error" {
   declare module.exports: Class<React$Component<{statusCode: number}, any>>;
 }
 
+declare module "next/config" {
+  declare module.exports: Class<React$Component<{statusCode: number}, any>>;
+}
+
 declare module "next/router" {
   declare module.exports: {
     route: string;

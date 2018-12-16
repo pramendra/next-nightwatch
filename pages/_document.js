@@ -1,7 +1,10 @@
 // @flow
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
+import getConfig from 'next/config';
 
+// $FlowFixMe
+const { publicRuntimeConfig } = getConfig();
 const clientSideJS = `
   document.addEventListener('DOMContentLoaded', event => {
     if ('serviceWorker' in navigator) {
@@ -16,6 +19,15 @@ const clientSideJS = `
   })
 `;
 
+const GA = `
+  window.dataLayer = window.dataLayer || [];
+  function gtag () {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+  gtag('config', ${publicRuntimeConfig.googleAnalytics});
+`;
+
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: any) {
     const initialProps = await Document.getInitialProps(ctx);
@@ -23,6 +35,10 @@ export default class MyDocument extends Document {
   }
 
   render() {
+    const {
+      __NEXT_DATA__: { dev },
+    } = this.props;
+
     return (
       <html lang="en-US">
         <Head>
@@ -48,6 +64,21 @@ export default class MyDocument extends Document {
             type="text/javascript"
             dangerouslySetInnerHTML={{ __html: clientSideJS }}
           />
+          {!dev && (
+            <>
+              <script
+                async
+                src={`https://www.googletagmanager.com/gtag/js?id=${
+                  publicRuntimeConfig.googleAnalytics
+                }`}
+              />
+
+              <script
+                type="text/javascript"
+                dangerouslySetInnerHTML={{ __html: GA }}
+              />
+            </>
+          )}
         </body>
       </html>
     );

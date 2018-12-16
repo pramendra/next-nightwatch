@@ -444,3 +444,85 @@ const clientSideJS = `
   })
 `;
 ```
+
+### setup google analytics
+
+#### update next.config.js
+
+```
++require('dotenv').config();
++
++const isDev = process.env.NODE_ENV !== 'production';
+
+ module.exports = withOffline({
++  publicRuntimeConfig: {
++    googleAnalytics: isDev ? '' : process.env.GOOGLE_ANALYTICS,
++  },
+```
+
+### update \_document.js
+
+```
++import getConfig from 'next/config';
+
++// $FlowFixMe
++const { publicRuntimeConfig } = getConfig();
+ const clientSideJS = `
+   document.addEventListener('DOMContentLoaded', event => {
+     if ('serviceWorker' in navigator) {
+@@ -16,6 +19,15 @@ const clientSideJS = `
+   })
+ `;
+
++const GA = `
++  window.dataLayer = window.dataLayer || [];
++  function gtag () {
++    dataLayer.push(arguments);
++  }
++  gtag('js', new Date());
++  gtag('config', ${publicRuntimeConfig.googleAnalytics});
++`;
++
+ export default class MyDocument extends Document {
+   static async getInitialProps(ctx: any) {
+     const initialProps = await Document.getInitialProps(ctx);
+@@ -23,6 +35,10 @@ export default class MyDocument extends Document {
+   }
+
+   render() {
++    const {
++      __NEXT_DATA__: { dev },
++    } = this.props;
++
+     return (
+       <html lang="en-US">
+         <Head>
+@@ -48,6 +64,21 @@ export default class MyDocument extends Document {
+             type="text/javascript"
+             dangerouslySetInnerHTML={{ __html: clientSideJS }}
+           />
++          {!dev && (
++            <>
++              <script
++                async
++                src={`https://www.googletagmanager.com/gtag/js?id=${
++                  publicRuntimeConfig.googleAnalytics
++                }`}
++              />
++
++              <script
++                type="text/javascript"
++                dangerouslySetInnerHTML={{ __html: GA }}
++              />
++            </>
++          )}
+         </body>
+       </html>
+     );
+```
+
+#### create .env
+
+```
+GOOGLE_ANALYTICS=
+```

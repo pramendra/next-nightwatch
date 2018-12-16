@@ -1,6 +1,12 @@
 const withOffline = require('next-offline');
+require('dotenv').config();
+
+const isDev = process.env.NODE_ENV !== 'production';
 
 module.exports = withOffline({
+  publicRuntimeConfig: {
+    googleAnalytics: isDev ? '' : process.env.GOOGLE_ANALYTICS,
+  },
   workboxOpts: {
     runtimeCaching: [
       {
