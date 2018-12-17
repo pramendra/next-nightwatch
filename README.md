@@ -634,3 +634,15 @@ test('<Flex /> should render', t => {
 });
 
 ```
+
+### setup test coverage via nyc
+
+```
+yarn add -D nyc
+```
+
+#### append following scripts in package.json
+
+```
+  "test": "nyc ava -T 1m --fast-fail",
+```

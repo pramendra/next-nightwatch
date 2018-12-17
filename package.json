@@ -16,7 +16,7 @@
     "flow stop": "flow stop",
     "flow status": "flow status",
     "flow coverage": "flow coverage",
-    "test": "ava -T 1m --fast-fail",
+    "test": "nyc ava -T 1m --fast-fail",
     "test:e2e": "nightwatch ./e2e/index.js -e default,mobile"
   },
   "dependencies": {
@@ -53,6 +53,7 @@
     "eslint-plugin-react": "^7.11.1",
     "flow-bin": "^0.89.0",
     "nightwatch": "^1.0.15",
+    "nyc": "^13.1.0",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.15.3",
     "raw-loader": "^1.0.0",
