@@ -43,8 +43,11 @@ jobs:
           keys:
             - app-dependencies-{{ checksum "yarn.lock" }}
             - app-dependencies-
+      - run: 
+          name: Running tests with coverage
+          command: yarn test
       - run:
-          name: Tests
+          name: Running tests End to end
           command: yarn test:e2e
 
 workflows:
