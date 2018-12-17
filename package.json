@@ -10,13 +10,14 @@
     "dev": "node server/main.js",
     "build": "next build",
     "start": "NODE_ENV=production node server/main.js",
-    "test:e2e": "nightwatch ./e2e/index.js -e default,mobile",
     "lint": "eslint '**/*.js' --quiet",
     "format": "prettier --write '**/*.js'",
     "flow start": "flow start",
     "flow stop": "flow stop",
     "flow status": "flow status",
-    "flow coverage": "flow coverage"
+    "flow coverage": "flow coverage",
+    "test": "ava -T 1m --fast-fail",
+    "test:e2e": "nightwatch ./e2e/index.js -e default,mobile"
   },
   "dependencies": {
     "ava": "^1.0.1",
@@ -28,13 +29,20 @@
     "ramda": "^0.26.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "recompose": "^0.30.0",
     "styled-components": "^4.1.2"
   },
   "devDependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-styled-components": "^1.9.4",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "browser-env": "^3.2.5",
     "chromedriver": "^2.44.1",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.3.0",

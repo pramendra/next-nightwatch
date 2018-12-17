@@ -564,3 +564,73 @@ yarn add -D babel-plugin-styled-components
            />
 +          {this.props.styleTags}
 ```
+
+### setup design system along with styled-components SSR
+
+#### setup ava
+
+```
+yarn add -D ava @babel/polyfill @babel/register @babel/preset-react browser-env enzyme enzyme-adapter-react-16
+```
+
+#### cerate a ava.config.js
+
+```
+export default {
+  require: [
+    '@babel/polyfill',
+    '@babel/register',
+    'raf/polyfill',
+    './setup-browser-env.js',
+  ],
+  files: ['!**/node_modules/**', './tests/**/*.test.js'],
+  cache: true,
+  failFast: true,
+  failWithoutAssertions: true,
+  powerAssert: false,
+  concurrency: 6,
+  babel: {
+    testOptions: {
+      babelrc: false,
+      presets: ['@babel/preset-react'],
+    },
+  },
+};
+```
+
+#### create a setup-browser-env.js
+
+```
+import browserEnv from 'browser-env';
+
+global.Braintree = {};
+browserEnv(['window', 'document', 'navigator']);
+
+```
+
+#### append following scripts in package.json
+
+```
+  "test": "ava -T 1m --fast-fail",
+```
+
+#### add saple test codes test/Flex.text.js
+
+```
+import React from 'react';
+import test from 'ava';
+import { shallow, configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { Flex } from '../core-components/Flex';
+
+configure({ adapter: new Adapter() });
+
+test('<Flex /> should render', t => {
+  t.plan(2);
+  const text = 'Hello world';
+  const wrapper = shallow(<Flex>{text}</Flex>);
+  t.is(wrapper.children().text(), text);
+  t.is(wrapper.name(), 'StyledComponent');
+});
+
+```
