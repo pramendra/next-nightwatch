@@ -26,7 +26,7 @@ module.exports = withOffline({
       },
     ],
   },
-  webpack(config, { dev, buildId, isServer }) {
+  webpack(config) {
     // css loader
     config.module.rules.push({
       test: /\.css$/,
