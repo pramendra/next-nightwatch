@@ -43,9 +43,17 @@ jobs:
           keys:
             - app-dependencies-{{ checksum "yarn.lock" }}
             - app-dependencies-
-      - run: 
+      - run:
           name: Running tests with coverage
           command: yarn test
+  test-e2e:
+    <<: *node
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - app-dependencies-{{ checksum "yarn.lock" }}
+            - app-dependencies-
       - run:
           name: Running tests End to end
           command: yarn test:e2e
@@ -64,4 +72,6 @@ workflows:
       - test:
           requires:
             - install
-            - check
+      - test-e2e:
+          requires:
+            - install
