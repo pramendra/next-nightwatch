@@ -646,3 +646,5 @@ yarn add -D nyc
 ```
   "test": "nyc ava -T 1m --fast-fail",
 ```
+
+### Setup Redux

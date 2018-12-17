@@ -1,0 +1,38 @@
+/* @flow */
+
+declare module 'rxjs' {
+  declare module.exports: any;
+}
+
+declare module 'redux-observable' {
+  declare module.exports: any;
+}
+
+declare module 'rxjs/operators' {
+  declare module.exports: any;
+}
+
+declare module 'isomorphic-unfetch' {
+  declare module.exports: any;
+}
+
+declare module 'redux' {
+  declare module.exports: any;
+}
+
+declare module 'redux-logger' {
+  declare module.exports: any;
+}
+
+declare module 'react-redux' {
+  declare module.exports: any;
+}
+
+declare module 'next/config' {
+  declare module.exports: any;
+}
+
+declare module 'next-redux-wrapper' {
+  declare module.exports: any;
+}
+

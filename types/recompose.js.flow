@@ -1,0 +1,21 @@
+/* @flow */
+
+declare module "recompose/compose" {
+  declare module.exports: any;
+}
+
+declare module "recompose/withState" {
+  declare module.exports: any;
+}
+
+declare module "recompose/withHandlers" {
+  declare module.exports: any;
+}
+
+declare module "recompose/branch" {
+  declare module.exports: any;
+}
+
+declare module "recompose/renderComponent" {
+  declare module.exports: any;
+}

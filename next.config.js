@@ -6,6 +6,9 @@ const isDev = process.env.NODE_ENV !== 'production';
 module.exports = withOffline({
   publicRuntimeConfig: {
     googleAnalytics: isDev ? '' : process.env.GOOGLE_ANALYTICS,
+    GITHUB_CLIENT_ID: process.env.GITHUB_CLIENT_ID,
+    GITHUB_CLIENT_SECRET: process.env.GITHUB_CLIENT_SECRET,
+    BASE_API_URL: 'https://api.github.com',
   },
   workboxOpts: {
     runtimeCaching: [

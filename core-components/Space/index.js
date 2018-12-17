@@ -1,8 +1,8 @@
 // @flow
 import styled from 'styled-components';
-import { forEachObjIndexed } from 'ramda/src/forEachObjIndexed';
-import { pick } from 'ramda/src/pick';
-import { keys } from 'ramda/src/keys';
+import forEachObjIndexed from 'ramda/src/forEachObjIndexed';
+import pick from 'ramda/src/pick';
+import keys from 'ramda/src/keys';
 import { Flex } from '../Flex';
 
 const nCalc = v => `calc(-1 * ${v})`;
